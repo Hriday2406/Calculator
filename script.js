@@ -1,16 +1,16 @@
-function add(a, b){
+function add(a, b) {
     return a + b;
 }
 
-function sub(a, b){
+function sub(a, b) {
     return a - b;
 }
 
-function multiply(a ,b){
+function multiply(a ,b) {
     return a * b;
 }
 
-function divide(a, b){
+function divide(a, b) {
     return a / b;
 }
 
@@ -25,40 +25,21 @@ function operate(num1, action, num2){
         case "/":
             return divide(num1, num2);
         default:
-            console.log("INVALID!");
             break;
     }
 }
-
-let operand1, operand2, operator, result;
-
-let display = document.querySelector('#display');
-let displayValue = '';
-
-// let num0 = document.querySelector('#num0');
-// let num1 = document.querySelector('#num1');
-// let num2 = document.querySelector('#num2');
-// let num3 = document.querySelector('#num3');
-// let num4 = document.querySelector('#num4');
-// let num5 = document.querySelector('#num5');
-// let num6 = document.querySelector('#num6');
-// let num7 = document.querySelector('#num7');
-// let num8 = document.querySelector('#num8');
-// let num9 = document.querySelector('#num9');
-
-
-// console.log(Array.from(document.querySelectorAll('.operator')));
 
 Array.from(document.querySelectorAll('.number')).forEach(item => {
     item.addEventListener('click', () => {
         displayValue += String(item.id[3]);
         display.textContent = displayValue;
-        console.log(displayValue);
     })
 });
 
 Array.from(document.querySelectorAll('.operator')).forEach(item => {
     item.addEventListener('click', () => {
+        if(alreadyHasOperator)
+            equalsTo();
         switch (item.id) {
             case "add":
                 displayValue += "+";
@@ -75,21 +56,105 @@ Array.from(document.querySelectorAll('.operator')).forEach(item => {
             default:
                 break;
         }
+        alreadyHasOperator = true;
         display.textContent = displayValue;
-        console.log(displayValue);
     })
 });
 
-document.querySelector('#clear').addEventListener('click', () => {
-    let arr = displayValue.split("");
-    arr.splice(arr.length-1, 1);
-    displayValue = arr.join('');
+document.querySelector('#decimal').addEventListener('click', () => {
+    if(!alreadyHasOperator){
+        if(!decimalFlag.first){
+            decimalFlag.first = true;
+            displayValue += '.';
+        }
+    }
+    else {
+        if(!decimalFlag.second){
+            decimalFlag.second = true;
+            displayValue += '.';
+        }
+    }
     display.textContent = displayValue;
-    console.log(displayValue);
 });
 
-// When the user presses the operator again, call the operate function
-// split the displayValue w.r.t the operator and the 0th is operand1 and 1st is operand2
-// Check the operator with .includes and then split with switch
+document.querySelector('#equal').addEventListener('click', () => {
+    if(alreadyHasOperator)
+        equalsTo();
+});
 
-// When the user presses the operator again, pop the displayValue and store it to append it later
+document.querySelector('#clear').addEventListener('click', () => {
+    let temp = displayValue.slice(-1);
+    if(temp == '+' || temp == '-' || temp == '*' || temp == '/')
+        alreadyHasOperator = false;
+
+    if(temp == '.'){
+        if(!alreadyHasOperator)
+            decimalFlag.first = false;
+        else
+            decimalFlag.second = false;
+    }
+
+    displayValue = displayValue.slice(0, -1);
+    display.textContent = displayValue;
+});
+
+document.querySelector('#allClear').addEventListener('click', () => {
+    alreadyHasOperator = false;
+    displayValue = '';
+    decimalFlag.first = false;
+    decimalFlag.second = false;
+    display.textContent = "|---DISPLAY---|";
+});
+
+function calcOperands() {
+    let operands = [];
+    if(displayValue.includes("+")){
+        operands = displayValue.split("+");
+        operator = "+";
+    }
+    else if(displayValue.includes("-")){
+        operands = displayValue.split("-");
+        operator = "-";
+    }
+    else if(displayValue.includes("*")){
+        operands = displayValue.split("*");
+        operator = "*";
+    }
+    else if(displayValue.includes("/")){
+        operands = displayValue.split("/");
+        operator = "/";
+    }
+    [operand1, operand2] = operands;
+}
+
+function equalsTo() {
+    calcOperands();
+    if(operand1 == 'NaN' || operand1 == 'ERROR!' || operand1 == undefined || operand2 == undefined){
+        displayValue = 'ERROR!';
+        display.textContent = displayValue;
+        return;
+    }
+
+    decimalFlag.second = false;
+    if(operator == "/" && +operand2 == 0){
+        displayValue = "LOL";
+        display.textContent = displayValue;
+    }
+    else{
+        result = operate(+operand1, operator, +operand2);
+        if(!Number.isInteger(result))
+            result = parseFloat(result.toFixed(8));
+        else
+            decimalFlag.first = false;
+        alreadyHasOperator = false;
+        displayValue = result.toString();
+        display.textContent = displayValue;
+    }
+}
+
+const display = document.querySelector('#display');
+let operand1, operand2, operator, result, alreadyHasOperator = false, displayValue = '';
+let decimalFlag = {
+    first: false,
+    second: false
+};
