@@ -103,7 +103,7 @@ document.querySelector('#allClear').addEventListener('click', () => {
     displayValue = '';
     decimalFlag.first = false;
     decimalFlag.second = false;
-    display.textContent = "|---DISPLAY---|";
+    display.textContent = "HRIDAY";
 });
 
 function calcOperands() {
