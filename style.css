@@ -10,7 +10,6 @@ body {
     width: 100vw;
     font-family: 'Roboto', sans-serif;
     font-family: 'Shadows Into Light', cursive;
-    /* text-align: center; */
     background-color: #21D4FD;
     background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
     background-size: cover;
@@ -27,14 +26,12 @@ main {
 .container {
     width: 500px;
     margin: 2rem;
-    /* background-color: rgba(255, 255, 255, 0.279); */
-    /* border: 3px solid black; */
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-@media (max-width: 650px) {
+@media (max-width: 650px){
     .container{
         width: 75vw;
     }
@@ -48,7 +45,7 @@ main {
     height: 7.8rem;
     font-size: 3rem;
     font-weight: 900;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.25);
     border: 3px solid black;
     border-radius: 20px;
     box-shadow: 0px 0px 15px black;
@@ -60,14 +57,14 @@ main {
 .btn {
     width: 100%;
     font-size: 3rem;
-    background-color: black;
-    color: white;
     font-weight: bold;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
     border: 2px solid white;
     border-radius: 20px;
     display: grid;
     place-content: center;
-    transition: all 0.02s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 .btn:active {

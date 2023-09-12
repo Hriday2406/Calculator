@@ -38,6 +38,8 @@ Array.from(document.querySelectorAll('.number')).forEach(item => {
 
 Array.from(document.querySelectorAll('.operator')).forEach(item => {
     item.addEventListener('click', () => {
+        if(displayValue.includes('ERROR!') || displayValue.includes('LOL'))
+            allClear();
         if(alreadyHasOperator)
             equalsTo();
         switch (item.id) {
@@ -83,6 +85,8 @@ document.querySelector('#equal').addEventListener('click', () => {
 });
 
 document.querySelector('#clear').addEventListener('click', () => {
+    if(displayValue.includes('ERROR!') || displayValue.includes('LOL'))
+        allClear();
     let temp = displayValue.slice(-1);
     if(temp == '+' || temp == '-' || temp == '*' || temp == '/')
         alreadyHasOperator = false;
@@ -98,13 +102,15 @@ document.querySelector('#clear').addEventListener('click', () => {
     display.textContent = displayValue;
 });
 
-document.querySelector('#allClear').addEventListener('click', () => {
+document.querySelector('#allClear').addEventListener('click', allClear);
+
+function allClear() {
     alreadyHasOperator = false;
     displayValue = '';
     decimalFlag.first = false;
     decimalFlag.second = false;
     display.textContent = "HRIDAY";
-});
+}
 
 function calcOperands() {
     let operands = [];
@@ -153,7 +159,7 @@ function equalsTo() {
 }
 
 const display = document.querySelector('#display');
-let operand1, operand2, operator, result, alreadyHasOperator = false, displayValue = '';
+let operand1 = 0, operand2 = 0, operator = "+", result = 0, alreadyHasOperator = false, displayValue = '';
 let decimalFlag = {
     first: false,
     second: false
