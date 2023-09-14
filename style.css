@@ -19,7 +19,7 @@ body {
 }
 
 main {
-    border: 3px solid black;
+    border: 5px solid black;
     border-radius: calc(20px + 2rem);
     box-shadow: 10px 10px 20px 5px black;
 }
@@ -46,13 +46,13 @@ main {
     font-size: 3rem;
     font-weight: 900;
     background-color: rgba(255, 255, 255, 0.25);
-    border: 3px solid black;
+    border: 5px solid black;
     border-radius: 20px;
     box-shadow: 0px 0px 15px black;
     display: flex;
     justify-content: center;
     align-items: center;
-} 
+}
 
 .btn {
     width: 100%;
@@ -60,11 +60,11 @@ main {
     font-weight: bold;
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
-    border: 2px solid white;
+    border: 3px solid white;
     border-radius: 20px;
     display: grid;
     place-content: center;
-    transition: all 0.1s ease-in-out;
+    transition: all 0.1s linear;
 }
 
 .btn:active {
@@ -73,38 +73,42 @@ main {
     background-color: white;
 }
 
+.btn:hover {
+    box-shadow: 5px 5px 15px black;
+}
+
 .operator {
     font-size: 4rem;
-    color:rgb(0, 206, 0);
-    border-color: rgb(0, 206, 0);
+    color:rgb(0, 255, 0);
+    border-color: rgb(0, 255, 0);
 }
 
 .operator:active{
-    background-color: rgb(0, 206, 0);
+    background-color: rgb(0, 255, 0);
 }
 
 #equal {
     font-size: 4rem;
-    color:darkorange;
-    border-color: darkorange;
+    color:rgb(255, 128, 0);
+    border-color: rgb(255, 128, 0);
 }
 
 #equal:active {
     color: black;
-    background-color: darkorange;
+    background-color: rgb(255, 128, 0);
 }
 
 #allClear, 
 #clear {
     width: 49%;
-    color: rgb(191, 0, 0);
-    border-color: rgb(191, 0, 0);
+    color: red;
+    border-color: red;
 }
 
 #allClear:active,
 #clear:active {
     color: black;
-    background-color: rgb(191, 0, 0);
+    background-color: red;
 }
 
 .row {

@@ -151,7 +151,7 @@ function equalsTo() {
 
     decimalFlag.second = false;
     if(operator == "/" && +operand2 == 0){
-        displayValue = "LOL";
+        displayValue = "LOL🤣";
         display.textContent = displayValue;
     }
     else{
