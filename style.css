@@ -75,12 +75,12 @@ main {
 
 .operator {
     font-size: 4rem;
-    color:green;
-    border-color: green;
+    color:rgb(0, 206, 0);
+    border-color: rgb(0, 206, 0);
 }
 
 .operator:active{
-    background-color: green;
+    background-color: rgb(0, 206, 0);
 }
 
 #equal {

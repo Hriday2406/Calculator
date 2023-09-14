@@ -20,7 +20,7 @@ function operate(num1, action, num2){
             return add(num1, num2);
         case "-":
             return sub(num1, num2);
-        case "*":
+        case "X":
             return multiply(num1, num2);
         case "/":
             return divide(num1, num2);
@@ -50,7 +50,7 @@ Array.from(document.querySelectorAll('.operator')).forEach(item => {
                 displayValue += "-";
                 break;
             case "multiply":
-                displayValue += "*";
+                displayValue += "X";
                 break;
             case "divide":
                 displayValue += "/";
@@ -88,7 +88,7 @@ document.querySelector('#clear').addEventListener('click', () => {
     if(displayValue.includes('ERROR!') || displayValue.includes('LOL'))
         allClear();
     let temp = displayValue.slice(-1);
-    if(temp == '+' || temp == '-' || temp == '*' || temp == '/')
+    if(temp == '+' || temp == '-' || temp == 'X' || temp == '/')
         alreadyHasOperator = false;
 
     if(temp == '.'){
@@ -118,17 +118,25 @@ function calcOperands() {
         operands = displayValue.split("+");
         operator = "+";
     }
-    else if(displayValue.includes("-")){
-        operands = displayValue.split("-");
-        operator = "-";
-    }
-    else if(displayValue.includes("*")){
-        operands = displayValue.split("*");
-        operator = "*";
+    else if(displayValue.includes("X")){
+        operands = displayValue.split("X");
+        operator = "X";
     }
     else if(displayValue.includes("/")){
         operands = displayValue.split("/");
         operator = "/";
+    }
+    else if(displayValue.includes("-")){
+        
+        operands = displayValue.split("-");
+        operator = "-";
+        if(displayValue[0] == '-'){
+            if(operands.length == 3){
+                operand1 = operands[1] * -1;
+                operand2 = operands[2];
+                return;
+            }
+        }
     }
     [operand1, operand2] = operands;
 }
