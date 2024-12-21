@@ -42,6 +42,11 @@ Array.from(document.querySelectorAll('.operator')).forEach(item => {
             allClear();
         if(alreadyHasOperator)
             equalsTo();
+        let lastValue = displayValue[displayValue.length-1];
+        if(lastValue == "+" || lastValue == "-" || lastValue == "X" || lastValue == "/"){
+            displayValue = displayValue.slice(0, -1);
+            display.textContent = displayValue;
+        }
         switch (item.id) {
             case "add":
                 displayValue += "+";
@@ -80,6 +85,9 @@ document.querySelector('#decimal').addEventListener('click', () => {
 });
 
 document.querySelector('#equal').addEventListener('click', () => {
+    let lastValue = displayValue[displayValue.length-1];
+    if(lastValue == "+" || lastValue == "-" || lastValue == "X" || lastValue == "/")
+        return;
     if(alreadyHasOperator)
         equalsTo();
 });
@@ -127,7 +135,6 @@ function calcOperands() {
         operator = "/";
     }
     else if(displayValue.includes("-")){
-        
         operands = displayValue.split("-");
         operator = "-";
         if(displayValue[0] == '-'){
@@ -139,11 +146,22 @@ function calcOperands() {
         }
     }
     [operand1, operand2] = operands;
+    if(operand1 == '.') 
+        operand1 = NaN;
+    if(operand2 == '.')
+        operand2 = NaN;
+}
+
+function valueIsNan(x) {
+    return x !== x;
 }
 
 function equalsTo() {
     calcOperands();
-    if(operand1 == 'NaN' || operand1 == 'ERROR!' || operand1 == undefined || operand2 == undefined){
+    if(operand2 == '' || operand2 == '' || operand2 == '' || operand2 == '')
+        return;
+    if(valueIsNan(operand1) || valueIsNan(operand2) || operand1 == 'ERROR!' || operand1 == undefined || operand2 == undefined){
+        console.log('inside')
         displayValue = 'ERROR!';
         display.textContent = displayValue;
         return;
