@@ -175,7 +175,7 @@ function equalsTo() {
     else{
         result = operate(+operand1, operator, +operand2);
         if(!Number.isInteger(result))
-            result = parseFloat(result.toFixed(8));
+            result = parseFloat(result.toFixed(11));
         else
             decimalFlag.first = false;
         alreadyHasOperator = false;
